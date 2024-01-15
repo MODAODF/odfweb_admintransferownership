@@ -1,0 +1,30 @@
+{
+  "name": "admin-transfer-ownership",
+  "version": "1.0.0",
+  "description": "Transfer ownership of a user's files to another user",
+  "main": "src/admin.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack serve --progress --config webpack.js",
+    "build": "NODE_ENV=production webpack --progress --config webpack.js"
+  },
+  "dependencies": {
+    "@nextcloud/auth": "^2.2.1",
+    "@nextcloud/axios": "^1.4.0",
+    "@nextcloud/browserslist-config": "^3.0.0",
+    "@nextcloud/router": "^2.2.0",
+    "@nextcloud/vue": "^2.7.0",
+    "debounce": "^2.0.0",
+    "vue": "^2.7.16"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.9.0",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^13.3.3",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
