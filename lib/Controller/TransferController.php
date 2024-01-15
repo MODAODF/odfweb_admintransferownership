@@ -175,17 +175,10 @@ class TransferController extends Controller {
 			->setObject('transfer', (string)$id);
 		$this->notificationManager->markProcessed($notification);
 
-		$newTransferOwnership = new TransferOwnershipEntity();
-		$newTransferOwnership->setNodeName($transferOwnership->getNodeName());
-		$newTransferOwnership->setFileId($transferOwnership->getFileId());
-		$newTransferOwnership->setSourceUser($transferOwnership->getSourceUser());
-		$newTransferOwnership->setTargetUser($transferOwnership->getTargetUser());
-		$this->mapper->insert($newTransferOwnership);
-
 		$this->jobList->add(TransferOwnership::class, [
-			'id' => $newTransferOwnership->getId(),
+			'id' => $transferOwnership->getId(),
 		]);
-		$this->eventDispatcher->dispatchTyped(new TransferEvent($newTransferOwnership, TransferEvent::REPLY_TYPE_ACCEPT));
+		$this->eventDispatcher->dispatchTyped(new TransferEvent($transferOwnership, TransferEvent::REPLY_TYPE_ACCEPT));
 		return new DataResponse(['message' => '已強制接收'], Http::STATUS_OK);
 	}
 

@@ -15,9 +15,11 @@ use OCP\IDBConnection;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 
 class PendingTransferMapper extends QBMapper {
-	public function __construct(IDBConnection $db) {
+	private $logMapper;
+
+	public function __construct(IDBConnection $db, LogMapper $logMapper) {
 		parent::__construct($db, 'user_transfer_owner', TransferOwnership::class);
-		$this->logMapper = \OC::$server->query(LogMapper::class);
+		$this->logMapper = $logMapper;
 	}
 
 	public function getAll(): array {
@@ -30,8 +32,12 @@ class PendingTransferMapper extends QBMapper {
 	/**
 	 * 未回覆的移交
 	 *
-	 * SELECT owner.* FROM `oc_user_transfer_owner` owner WHERE owner.id
-	 *	  NOT IN (SELECT log.origin_id from `oc_user_transfer_log` log WHERE log.origin_id IS NOT null)
+	 * SELECT owner.* 
+	 * FROM `oc_user_transfer_owner` owner 
+	 * WHERE owner.id
+	 *	  NOT IN (SELECT log.origin_id
+	 * 		FROM `oc_user_transfer_log` log 
+	 * 		WHERE log.origin_id IS NOT null)
 	 */
 	public function getPending(): array {
 		$notInArr = $this->logMapper->getNotNullOriginIds();
