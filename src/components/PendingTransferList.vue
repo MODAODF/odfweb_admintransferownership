@@ -2,8 +2,8 @@
 	<div class="list">
 		<h3><b>等待新擁有者回覆</b>的移交項目</h3>
 		<div>
-			<em v-if="this.errorMsg || emptyListText">
-				{{ this.errorMsg || emptyListText }}
+			<em v-if="errorMsg || emptyListText">
+				{{ errorMsg || emptyListText }}
 			</em>
 			<table v-else-if="getList !== undefined">
 				<thead>
@@ -19,7 +19,8 @@
 					<PendingRow v-for="(item, index) in getList"
 						:key="index"
 						:index="index"
-						:item="item" />
+						:item="item"
+						:updateObjs="updateObjs" />
 				</tbody>
 			</table>
 		</div>
@@ -34,7 +35,7 @@ export default {
 	components: {
 		PendingRow,
 	},
-	props: ['errorMsg', 'initList', 'searchOjb'],
+	props: ['errorMsg', 'initList', 'searchObj', 'updateObjs'],
 	computed: {
 		emptyListText() {
 			if (this.newlist && this.newlist.length < 1) {
@@ -56,7 +57,7 @@ export default {
 		initList(newVal, oldVal) {
 			this.newlist = newVal
 		},
-		searchOjb(newVal, oldVal) {
+		searchObj(newVal, oldVal) {
 			if (!newVal) {
 				this.newlist = this.initList
 			} else {

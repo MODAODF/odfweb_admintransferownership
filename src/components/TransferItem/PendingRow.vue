@@ -31,6 +31,10 @@ export default {
 			type: Array,
 			required: true,
 		},
+		updateObjs: {
+			type: Function,
+			required: true,
+		}
 	},
 	watch: {
 		item() {
@@ -63,6 +67,7 @@ export default {
 					const msg = data?.message || `已回覆(${t(this.appId, type)})`
 					this.actionStatus = msg
 					showSuccess(msg)
+					this.updateObjs()
 				})
 				.catch(error => {
 					const msg = error?.response?.data?.message || '未知的錯誤'

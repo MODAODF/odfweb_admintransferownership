@@ -3,8 +3,8 @@
 		<h3><b>等待背景工作執行</b>的移交項目</h3>
 		<em>（檢查<a :href="jobUrl" target="_blank"><u>背景工作設定值</u></a>）</em>
 		<div>
-			<em v-if="this.errorMsg || emptyListText">
-				{{ this.errorMsg || emptyListText }}
+			<em v-if="errorMsg || emptyListText">
+				{{ errorMsg || emptyListText }}
 			</em>
 			<table v-else-if="getList !== undefined">
 				<thead>
@@ -37,7 +37,7 @@ export default {
 	components: {
 		BackgroundJobRow,
 	},
-	props: ['errorMsg', 'initList', 'searchOjb'],
+	props: ['errorMsg', 'initList', 'searchObj'],
 	computed: {
 		emptyListText() {
 			if (this.newlist && this.newlist.length < 1) {
@@ -59,7 +59,7 @@ export default {
 		initList(newVal, oldVal) {
 			this.newlist = newVal
 		},
-		searchOjb(newVal, oldVal) {
+		searchObj(newVal, oldVal) {
 			if (!newVal) {
 				this.newlist = this.initList
 			} else {

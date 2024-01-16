@@ -2,8 +2,8 @@
 	<div class="list">
 		<h3><b>已完成</b>的移交項目</h3>
 		<div>
-			<em v-if="this.errorMsg || emptyListText">
-				{{ this.errorMsg || emptyListText }}
+			<em v-if="errorMsg || emptyListText">
+				{{ errorMsg || emptyListText }}
 			</em>
 			<table v-else-if="getList !== undefined">
 				<thead>
@@ -38,7 +38,7 @@ export default {
 	components: {
 		ClosedRow,
 	},
-	props: ['errorMsg', 'initList', 'searchOjb'],
+	props: ['errorMsg', 'initList', 'searchObj'],
 	computed: {
 		emptyListText() {
 			if (this.newlist && this.newlist.length < 1) {
@@ -60,7 +60,7 @@ export default {
 		initList(newVal, oldVal) {
 			this.newlist = newVal
 		},
-		searchOjb(newVal, oldVal) {
+		searchObj(newVal, oldVal) {
 			if (!newVal) {
 				this.newlist = this.initList
 			} else {

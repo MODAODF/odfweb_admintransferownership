@@ -2,9 +2,9 @@
 	<div>
 		<ParagraphMultiselect :elId="searchUserKey" @selectedVal="getSelectedVal" /><br>
 		<!-- 各項紀錄 -->
-		<PendingTransferList :errorMsg="pendingObj.listError" :initList="pendingObj.list" :searchOjb="searchObj" /><br>
-		<BackgroundJobTransferList :errorMsg="jobObj.listError" :initList="jobObj.list" :searchOjb="searchObj" /><br>
-		<ClosedTransferList  :errorMsg="closedObj.listError" :initList="closedObj.list" :searchOjb="searchObj" />
+		<PendingTransferList :errorMsg="pendingObj.listError" :initList="pendingObj.list" :searchObj="searchObj" :updateObjs="updateObjs" /><br>
+		<BackgroundJobTransferList :errorMsg="jobObj.listError" :initList="jobObj.list" :searchObj="searchObj" /><br>
+		<ClosedTransferList  :errorMsg="closedObj.listError" :initList="closedObj.list" :searchObj="searchObj" />
 	</div>
 </template>
 
@@ -45,9 +45,7 @@ export default {
 		}
 	},
 	beforeMount() {
-		this.getData('pendingObj')
-		this.getData('jobObj')
-		this.getData('closedObj')
+		this.updateObjs()
 	},
 	methods: {
 		getSelectedVal(val) {
@@ -57,7 +55,8 @@ export default {
 			const self = this[objName]
 			axios.get(self.api)
 				.then(({ data }) => {
-					self.list = data
+					self.listError = undefined
+					this.$set(self, 'list', data)
 				})
 				.catch(error => {
 					self.list = undefined
@@ -70,7 +69,12 @@ export default {
 					}
 				})
 		},
-	}
+		updateObjs() {
+			this.getData('pendingObj')
+			this.getData('jobObj')
+			this.getData('closedObj')
+		}
+	},
 }
 </script>
 
