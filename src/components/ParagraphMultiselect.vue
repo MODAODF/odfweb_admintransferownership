@@ -73,7 +73,7 @@ export default {
 			if (query.length < this.config.minSearchStringLength) return
 			this.loadingUsers = true
 			try {
-				const response = await axios.get(generateOcsUrl('apps/files_sharing/api/v1') + 'sharees', {
+				const response = await axios.get(generateOcsUrl('apps/files_sharing/api/v1/') + 'sharees', {
 					params: {
 						format: 'json',
 						itemType: 'file',
