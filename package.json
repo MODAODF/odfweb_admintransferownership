@@ -5,7 +5,8 @@
   "main": "src/admin.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack serve --progress --config webpack.js",
-    "build": "NODE_ENV=production webpack --progress --config webpack.js"
+    "build": "NODE_ENV=production webpack --progress --config webpack.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --config webpack.js"
   },
   "dependencies": {
     "@nextcloud/auth": "^2.2.1",
