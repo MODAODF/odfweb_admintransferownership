@@ -47,6 +47,7 @@ export default {
 			if (this.selectedTargetUser?.user === this.selectedSourceUser?.user) {
 				return false
 			}
+			// 原擁有者和新擁有者欄位是否都已填寫
 			return !!this.selectedTargetUser && !!this.selectedSourceUser
 		},
 		submitButtonText() {
@@ -72,6 +73,7 @@ export default {
 		submit() {
 			if (!this.canSubmit) {
 				console.warn('ignoring form submit')
+				return
 			}
 			this.submitError = undefined
 			const data = {
