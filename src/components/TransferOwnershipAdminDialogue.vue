@@ -87,7 +87,6 @@ export default {
 				.then(resp => resp.data)
 				.then(data => {
 					console.info('Transfer ownership request sent', { data })
-					this.directory = undefined
 					this.selectedSourceUser = null
 					this.selectedTargetUser = null
 					showSuccess('已送出所有權轉移的請求')
