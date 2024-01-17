@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-/deep/ .list {
+:deep .list {
 	table {
 		margin: 15px auto;
 		width: 100%;
