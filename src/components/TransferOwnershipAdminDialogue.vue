@@ -91,6 +91,7 @@ export default {
 					this.selectedSourceUser = null
 					this.selectedTargetUser = null
 					showSuccess('已送出所有權轉移的請求')
+					this.$emit('transfer-submit')
 				})
 				.catch(error => {
 					console.error('Could not send ownership transfer request', { error })

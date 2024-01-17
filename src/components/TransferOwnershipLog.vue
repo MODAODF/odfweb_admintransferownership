@@ -47,6 +47,9 @@ export default {
 	beforeMount() {
 		this.updateObjs()
 	},
+	mounted() {
+		this.$parent.$on('update-objs', this.updateObjs)
+	},
 	methods: {
 		getSelectedVal(val) {
 			this.searchObj = val

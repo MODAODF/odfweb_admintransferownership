@@ -1,7 +1,7 @@
 <template>
 	<div id="transfer-settings" class="section">
 		<h2>{{ t('admintransferownership', 'AdminTransferownership') }}</h2>
-		<TransferOwnershipAdminDialogue />
+		<TransferOwnershipAdminDialogue @transfer-submit="transferSubmit" />
 		<hr>
 		<h2>移交紀錄</h2>
 		<TransferOwnershipLog />
@@ -18,5 +18,10 @@ export default {
 		TransferOwnershipAdminDialogue,
 		TransferOwnershipLog,
 	},
+	methods: {
+		transferSubmit() {
+			this.$emit('update-objs')
+		}
+	}
 }
 </script>
