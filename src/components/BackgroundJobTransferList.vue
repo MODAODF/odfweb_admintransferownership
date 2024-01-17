@@ -37,7 +37,7 @@ export default {
 	components: {
 		BackgroundJobRow,
 	},
-	props: ['errorMsg', 'initList', 'searchObj'],
+	props: ['errorMsg', 'initList', 'searchObj', 'updateObjs'],
 	computed: {
 		emptyListText() {
 			if (this.newlist && this.newlist.length < 1) {
@@ -58,6 +58,16 @@ export default {
 	watch: {
 		initList(newVal, oldVal) {
 			this.newlist = newVal
+			// 如果等待背景工作執行有新的項目，則每 10 秒更新一次
+			if (this.newlist && this.newlist.length > 0 && !this.timer) {
+				this.timer = setInterval(() => {
+					this.updateObjs()
+				}, 10000)
+			} 
+			if ((!this.newlist || this.newlist.length < 1) && this.timer) {
+				clearInterval(this.timer)
+				this.timer = null
+			}
 		},
 		searchObj(newVal, oldVal) {
 			if (!newVal) {
@@ -77,6 +87,7 @@ export default {
 			searchUid: null,
 			currentSort: '',
 			currentSortDir: 'asc',
+			timer: null,
 		}
 	},
 	methods: {

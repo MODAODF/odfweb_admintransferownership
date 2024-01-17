@@ -3,7 +3,7 @@
 		<ParagraphMultiselect :elId="searchUserKey" @selectedVal="getSelectedVal" /><br>
 		<!-- 各項紀錄 -->
 		<PendingTransferList :errorMsg="pendingObj.listError" :initList="pendingObj.list" :searchObj="searchObj" :updateObjs="updateObjs" /><br>
-		<BackgroundJobTransferList :errorMsg="jobObj.listError" :initList="jobObj.list" :searchObj="searchObj" /><br>
+		<BackgroundJobTransferList :errorMsg="jobObj.listError" :initList="jobObj.list" :searchObj="searchObj" :updateObjs="updateObjs" /><br>
 		<ClosedTransferList  :errorMsg="closedObj.listError" :initList="closedObj.list" :searchObj="searchObj" />
 	</div>
 </template>
